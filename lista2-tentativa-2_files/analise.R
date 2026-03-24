@@ -21,6 +21,7 @@ idh_municipios <- read.csv2("C:\\Users\\sergi\\Downloads\\idh_municipios.csv", f
 library(ggplot2)
 
 View(idh_municipios)
+
 library(tidyverse)
 install.packages("tidyverse")
 
@@ -38,3 +39,8 @@ usethis::use_github()
 install.packages("rmarkdown")    
 install.packages("tinytex")
 tinytex::install_tinytex()
+install.packages("dplyr")
+library(dplyr)
+
+df<- municipios_virgula%>%
+  filter(idh==max(idh))
