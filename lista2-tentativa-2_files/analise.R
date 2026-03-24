@@ -26,9 +26,9 @@ library(tidyverse)
 install.packages("tidyverse")
 
 idh_municipios%>%
-  ggplot(aes(y=idh_renda, x=idh_educacao, color = regiao)) +
-  geom_point() +
-  xlab("IDH Educação") + ggtitle("IDH Educação x IDH Renda") + ylab("IDH Renda")
+  ggplot(aes(y=idh_2010, x=municipio, color = regiao)) +
+  geom_col() +
+  xlab("municipio") + ggtitle("municipio x IDH 2010") + ylab("IDH 2010")
 
 #Usando o banco municipios_virgula.csv, encontre o município com o maior IDH e o município com o menor IDH.
 
@@ -44,3 +44,8 @@ library(dplyr)
 
 df<- municipios_virgula%>%
   filter(idh==max(idh))
+
+#criando branche
+install.packages("usethis")
+git --version
+
