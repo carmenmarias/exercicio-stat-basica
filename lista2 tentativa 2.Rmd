@@ -1,10 +1,8 @@
 ---
-title: "Lista2"
+title: "Lista 2"
 author: "Carmen Maria"
-date: "2026-03-23"
-output:
-  pdf_document: default
-  html_document: default
+date: "23/03/2026"
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -31,14 +29,49 @@ plot(pressure)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
+## Exercícios Lista 2: RMarkdown
 
-***Um parágrafo com texto em itálico***
+*Os exercícios que se referem a aula 2 foram feitos no RStudios e as respostas registradas no google docs que envio em anexo também. Peço perdão por não condensar todos juntos fiquei com honesto medo de não conseguir enviar dessa maneira.*
 
-1. Uma lista
-2. Numerada
+Quando cliquei em "Knit" sem fazer alterações no documento, uma página com as informações dadas pelo R apareceu, como dado acima. Faço um adendo aqui que sem querer tinha feito configurações erradas em testes e acabei tendo também o gráfico como PDF após utilizar o LaTex (fiquei muito confusa ao olhar os meus arquivos do computador até entender, mas já apaguei!).
 
-```{r media IDH 2010, echo=FALSE}
-library(dplyr)
-idh_municipios%>%
-  summarise(sum(idh_2010))
+No arquivo .Rmd criado, adicione: (a) um parágrafo com texto em negrito e itálico; (b) uma lista numerada; (c) um chunk de código R que calcule a média de um vetor qualquer. Renderize o documento.
+ 
+ ***Adicionando um parágrafo com texto em itálico e em negrito esperançosamente dando certo!!***
+ 
+ 1. Em sequência
+ 2. Vamos adicionar uma lista numerada
+ 3. No próximo espaço espero conseguir adicionar o chunk com média aritmética de um vetor qualquer
+ 
+```{r MEAN, echo=TRUE}
+mean(c(1, 2, 3, 4, 5))
 ```
+
+Crie um documento R Markdown que importe o banco dados/pib_cid.RDS, apresente uma tabela com as 10 primeiras linhas (usando kable()) e um gráfico de sua escolha. Use a opção echo = FALSE nos chunks para esconder o código no documento final.
+
+Tabela com as 10 primeiras linhas
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+Pib_Cid <- readRDS("C:\\Carmen\\textos - usp\\Pasta de R e Métodos\\pib_cid.RDS")
+library(knitr)
+kable(head(Pib_Cid, 10))
+```
+
+Gráfico histograma com pib_per_capita e pintado a partir das cores por região 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+Pib_Cid%>%
+  ggplot(aes(x=pib_per_capita, fill = nome_regiao)) + geom_histogram() +
+  theme_light() + theme(text=element_text(size=12)) +
+  ggtitle("PIB per capita em cores")
+```
+
+*Na tabela e no gráfico escondi também os avisos e as mensagens*
+
+Crie a estrutura de pastas de um projeto de pesquisa seguindo a convenção apresentada neste capítulo (data/raw/, data/processed/, scripts/, outputs/, paper/). Dentro de scripts/, crie dois arquivos vazios: 01_clean.R e 02_analysis.R. Inicialize o projeto como repositório Git e faça o primeiro commit.
+
+Fazendo no Git!
+Fica aqui o link do Git que estão os repositórios [GIT](https://github.com/carmenmarias/exercicio-stat-basica/tree/main)
+
+Priorizei os exercícios voltados a graduação e deixei para praticar os exercícios difíceis.
