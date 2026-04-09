@@ -48,3 +48,31 @@ df<- municipios_virgula%>%
 #criando branche
 install.packages("usethis")
 git --version
+
+
+#aula 08/04
+set.seed(42)
+
+# População: renda e acesso à internet (correlacionados)
+renda <- rgamma(100000, shape = 2, rate = 1) * 1500
+prob_internet <- pmin(renda / max(renda) + 0.2, 1)
+tem_internet <- rbinom(100000, 1, prob_internet)
+
+# Parâmetro verdadeiro
+cat("Renda média da população:", round(mean(renda)), "\n")
+cat("Renda média de quem tem internet:", round(mean(renda[tem_internet == 1])), "\n")
+
+# Simular 1.000 pesquisas de cada tipo
+n <- 200  # <-- MUDE AQUI: tente 50, 200 e 1000
+medias_aleatoria <- replicate(1000, mean(sample(renda, n)))
+medias_conveniencia <- replicate(1000, mean(sample(renda[tem_internet == 1], n)))
+
+# Comparar lado a lado
+par(mfrow = c(1, 2))
+hist(medias_aleatoria, breaks = 30, main = "Amostra Aleatória",
+     xlab = "Média amostral", col = "steelblue", xlim = range(c(medias_aleatoria, medias_conveniencia)))
+abline(v = mean(renda), col = "red", lwd = 2, lty = 2)
+
+hist(medias_conveniencia, breaks = 30, main = "Amostra de Conveniência",
+     xlab = "Média amostral", col = "salmon", xlim = range(c(medias_aleatoria, medias_conveniencia)))
+abline(v = mean(renda), col = "red", lwd = 2, lty = 2)
